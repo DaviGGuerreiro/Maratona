@@ -13,7 +13,10 @@ using pll = pair<ll,ll>;
 #define all(x) begin(x), end(x)
 #define rall(x) rbegin(x), rend(x)
 //debug
-#define dbg(x) cerr << #x << " = " << x << "\n"
+#define dbg(x) cerr << #x << " = " << x << "\n" 
+
+//  ll aux = LLONG_MAX;
+//  int a = INT_MAX;
 
 int main(){
     ios::sync_with_stdio(false);cin.tie(0);
