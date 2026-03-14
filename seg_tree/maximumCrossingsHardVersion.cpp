@@ -2,11 +2,12 @@
 using namespace std;
 using ll = long long;
 
+int n;
 vector<int> tree;
 vector<int> vec;
 
 int join(int l, int r){
-    return min(l,r);
+    return l + r;
 }
 
 //buildando segtree
@@ -25,7 +26,7 @@ void build(int v, int tl, int tr){
 //update segtree
 void update(int v, int tl, int tr, int pos, int new_val){
     if(tl == tr){
-        tree[v] = new_val;
+        tree[v] += new_val;
     }
     else{
         int tm = (tl + tr)/2;
@@ -50,15 +51,26 @@ int query(int v, int L, int R, int l, int r){
     return join(query(2*v, L, R, l, m), query(2*v + 1, L, R, m+1 ,r));
 }
 
-int main(){
-    ios::sync_with_stdio(false);cin.tie(0);
-    int n;
+void solve(){
     cin>>n;
-    tree = vector<int> (4*n);
+    ll resposta = 0;
+    tree = vector<int> (4*(n+1), 0);
     vec = vector<int> (n);
-    for(int i=0;i<n;i++){
+    for(int i = 0; i<n;i++){
         cin>>vec[i];
     }
-    build(1, 0, n-1);
+    for(int i = 0; i<n; i++){
+        resposta += query(1,vec[i],n,1,n);
+        update(1,1,n,vec[i],1);
+    }
+    cout<<resposta<<'\n';
+}
+
+int main(){
+    ios::sync_with_stdio(false);cin.tie(0);
+    int t; cin>>t;
+    while(t--){
+        solve();
+    }
     return 0;
 }
