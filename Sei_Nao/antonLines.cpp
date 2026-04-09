@@ -25,7 +25,7 @@ int main(){
     cin>>x1>>x2;
     ll a, b;
     ll y1, y2;
-    multiset<int> conj;
+    multiset<ll> conj;
     vector<pair<ll,ll>> vec;
     for(int i=0;i<n;i++){
         cin>>a>>b;

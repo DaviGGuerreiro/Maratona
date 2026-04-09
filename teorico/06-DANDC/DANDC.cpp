@@ -1,17 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
 using ll = long long;
-
 struct Query{
     int l, r, idx;
 };
-
 vector<int> vec;
 vector<int> resposta;
 vector<Query> queries;
 vector<Query> aux;
 vector<int> s, p;
-
 void dnc(int l, int r, int ql, int qr){
     if(l > r || ql > qr) return;
     int m = l + (r-l)/2;
@@ -21,7 +18,6 @@ void dnc(int l, int r, int ql, int qr){
         else if(queries[i].r < m) cnt_l++;
         else cnt_r++;
     }
-
     int p_l = ql, p_m = ql + cnt_l, p_r = p_m + cnt_m; // iterador que indica inicio de cada uma desses grupos [esquerda,m,direita]
     for(int i = ql; i <= qr; i++){ //atualiza aux para delimitar [esquerda,meio,direita]
         if(queries[i].l <= m && queries[i].r >= m){
@@ -37,20 +33,15 @@ void dnc(int l, int r, int ql, int qr){
             p_r++;
         }
     }
-
     for(int i = ql; i <= qr; i++){ //queries pega os valores antes organizados
         queries[i] = aux[i];
     }
-
     int l_start = ql, l_end = ql + cnt_l - 1; // indicadores comeco e fim de cada um dos grupos [esquerda,meio,direita]
     int m_start = l_end + 1, m_end = m_start + cnt_m - 1;
     int r_start = m_end + 1, r_end = qr;
-    
     dnc(l, m - 1, l_start, l_end);
     dnc(m+1, r, r_start, r_end);
-
     if(m_start > m_end) return;
-
     s[m] = vec[m];  //salvando menor sufixo [l,m]
     for(int i = m-1; i>=l; i--){
         s[i] = min(vec[i], s[i+1]);
@@ -59,13 +50,11 @@ void dnc(int l, int r, int ql, int qr){
     for(int i = m+1; i<=r; i++){
         p[i] = min(vec[i], p[i-1]);
     }
-
     Query x;
     for(int i = m_start; i<= m_end; i++){
         x = queries[i];
         resposta[x.idx] = min(s[x.l], p[x.r]);  //query x é uma query do meio que tem como menor valor ou o menor sufixo [l,m] ou o menor prefixo [m,r]
     }
-
 }
 
 void solve(){
@@ -87,10 +76,4 @@ void solve(){
     for(int i = 0;i<q;i++){
         cout<<resposta[i]<<'\n';
     }
-}
-
-int main(){
-    ios::sync_with_stdio(false);cin.tie(0);
-    solve();
-    return 0;
 }
