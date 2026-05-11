@@ -3,7 +3,6 @@ using namespace std;
 using ll = long long;
 using pii = pair<int,int>;
 const int MAXN = 1e5 + 1;
-
 vector<int> adj[MAXN];
 int deg[MAXN];
 int n;
