@@ -17,4 +17,5 @@ Ele serve como um caderno prático de referência para revisão de técnicas, pa
 - Teoria dos jogos
 - STL e prefix sums
 - Funções Geradoras
+- LCA, Euler Tour e Binary Lifting
 - Upsolving de contests e listas de exercícios
